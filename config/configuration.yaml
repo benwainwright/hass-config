@@ -15,7 +15,7 @@ proximity:
   home:
     tolerance: 50
     unit_of_measurement: m
-    devices
+    devices:
       - person.ben_wainwright
 
 lovelace:
