@@ -12,9 +12,8 @@ jobs:
     steps:
       - name: ⤵️ Check out configuration from GitHub
         uses: actions/checkout@v3
+      - run: mv fakesecrets.yaml secrets.yaml
       - name: 🚀 Run Home Assistant Configuration Check
-        uses: frenck/action-home-assistant@v1
+        uses: kpucynski/action-ha-config-check@master
         with:
-          path: "./"
-          secrets: fakesecrets.yaml
-          version: stable
+          ha_version: "latest"
