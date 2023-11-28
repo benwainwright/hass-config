@@ -1,0 +1,125 @@
+- id: "1679151243464"
+  alias: Tumble dryer finished
+  description: When the tumble dryer finishes, flash the lights and notify me
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.tumble_dryer_machine_status
+      to: Finished
+      alias: When tumble dryer changes from 'running' to 'finished'
+  condition: []
+  action:
+    - service: notify.lg_webos_smart_tv
+      data:
+        message: Tumble dryer has finished
+        title: Alert
+      alias: Send a notification to the TV
+    - service: notify.mobile_app_bens_imac_pro
+      data:
+        message: Tumble dryer has finished
+        title: Something Happened
+      alias: Send a notification to my iMac
+    - service: notify.mobile_app_bens_iphone
+      data:
+        title: Something Happened
+        message: Tumble dryer has finished
+      alias: Send a notification to my phone
+    - service: light.turn_on
+      data:
+        flash: short
+      target:
+        device_id:
+          - bb50798587faaaedd90dd759bcda596d
+          - 724025db180dee70f6b26f3550081ece
+          - 4b2488441e2e457a3f1aafff5bc605a2
+          - ed6dce58e2c6a6803912f1de797f3be6
+          - f9e67b6cef1cab3777ad91853846ffa1
+          - e3a11c7c80006973deae18716bac3e55
+          - 916cf570132971292b8d10d43cdc22da
+          - 73bb2a1042814049dbdec740f9d6e969
+          - 8f9ba795956bc0d9515b50ebdac01143
+          - 8d738acf8f604ebe2587472e6ef6d6bd
+          - 129ebd5097e038336c66d39b4940ec22
+          - 2a2e9b9e504cfd614775dae46297a170
+          - 5a460cd21c4055c2b1268f865546dd4e
+      alias: Flash lights
+  mode: single
+- id: "1679608518551"
+  alias: Set alarm for tomorrow
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - light.bedroom_lights
+      from: "on"
+      to: "off"
+  condition:
+    - condition: time
+      after: "20:00:00"
+      alias: If its after 8pm
+    - condition: state
+      entity_id: binary_sensor.in_bed
+      state: "on"
+      alias: And I'm in bed
+  action:
+    - service: media_player.play_media
+      target:
+        entity_id: media_player.bedroom_sonos_one
+      data:
+        media_content_type: custom
+        media_content_id:
+          "{%- set ns = namespace(found = false) %} {%- set data = namespace(summary
+          = '', start_hour='', start_minute='', am_pm='') %}\n{%- for n in range(10)
+          -%}\n  {%- set tomorrow_timestamp = as_timestamp((now().date() + timedelta(days=1)))
+          %}\n  {%- set day_after_tomorrow_timestamp = as_timestamp((now().date() +
+          timedelta(days=2))) %}\n  {%- set id = 'sensor.ical_ben_s_calendar_event_'
+          + n|string %}\n\n\n  {%- if state_attr(id, 'all_day') == false -%}\n    {%-
+          set start = as_timestamp(state_attr(id, 'start'))%}\n     {%- if start > tomorrow_timestamp
+          and start < day_after_tomorrow_timestamp and ns.found == false %}\n        {%-
+          set data.summary = state_attr(id, 'summary') %}\n        {%- set data.start_hour
+          = state_attr(id, 'start').strftime('%-H') %}\n        {%- set data.start_minute
+          = state_attr(id, 'start').strftime('%-M') %}\n        {%- if data.start_minute
+          == '0' -%}\n          {%- set data.start_minute = '' %}\n        {%- else
+          %}\n          {%- set data.start_minute = ' ' + data.start_minute %}\n        {%-
+          endif %}\n        \n        {%- set data.am_pm = state_attr(id, 'start').strftime('%p')
+          %}\n        {%- if data.am_pm == 'AM' -%}\n          {%- set data.am_pm =
+          'A. M.' %}\n        {%- else %}\n          {%- set data.am_pm = 'P. M.' %}\n
+          \       {%- endif %}          \n        {%- set ns.found = true %}\n     {%-
+          endif -%}\n  {%- endif -%}\n{%- endfor -%}\n{%- if ns.found == true %}\n  Simon
+          says the first event tomorrow is {{ data.summary }}, at {{\n  data.start_hour
+          }} {{- data.start_minute }} {{ data.am_pm }}\n{%- else %}\n  Simon says there
+          is no events in your calendar tomorrow\n{% endif %}\n\n \n"
+      alias: Announce the first event tomorrow
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 5
+        milliseconds: 0
+    - service: media_player.play_media
+      target:
+        entity_id: media_player.bedroom_sonos_one
+      data:
+        media_content_type: custom
+        media_content_id:
+          "{%- set ns = namespace(found = false) %} {%- set data = namespace(summary
+          = '', start_hour='', start_minute='', am_pm='') %}\n{%- for n in range(10)
+          -%}\n  {%- set tomorrow_timestamp = as_timestamp((now().date() + timedelta(days=1)))
+          %}\n  {%- set day_after_tomorrow_timestamp = as_timestamp((now().date() +
+          timedelta(days=2))) %}\n  {%- set id = 'sensor.ical_ben_s_calendar_event_'
+          + n|string %}\n\n\n  {%- if state_attr(id, 'all_day') == false -%}\n    {%-
+          set start = as_timestamp(state_attr(id, 'start'))%}\n     {%- if start > tomorrow_timestamp
+          and start < day_after_tomorrow_timestamp and ns.found == false %}\n        {%-
+          set data.summary = state_attr(id, 'summary') %}\n        {%- set data.start_hour
+          = state_attr(id, 'start').strftime('%-H') %}\n        {%- set data.start_minute
+          = state_attr(id, 'start').strftime('%-M') %}\n        {%- if data.start_minute
+          == '0' -%}\n          {%- set data.start_minute = '' %}\n        {%- else
+          %}\n          {%- set data.start_minute = ' ' + data.start_minute %}\n        {%-
+          endif %}\n        \n        {%- set data.am_pm = state_attr(id, 'start').strftime('%p')
+          %}\n        {%- if data.am_pm == 'AM' -%}\n          {%- set data.am_pm =
+          'A. M.' %}\n        {%- else %}\n          {%- set data.am_pm = 'P. M.' %}\n
+          \       {%- endif %}          \n        {%- set ns.found = true %}\n     {%-
+          endif -%}\n  {%- endif -%}\n{%- endfor -%} {%- if ns.found == true %}\n  Set
+          alarm for {{ data.start_hour|int - 1 }} {{-\ndata.start_minute }} {{ data.am_pm
+          }} tomorrow {%- endif %}\n"
+      alias: And set my alarm
+  mode: single

@@ -1,0 +1,141 @@
+automation: !include includes/automations.yaml
+script: !include includes/scripts.yaml
+scene: !include includes/scenes.yaml
+template: !include includes/template.yaml
+climate: !include includes/climate.yaml
+frontend: !include includes/frontend.yaml
+switch: !include includes/switch.yaml
+
+rest_command:
+  shutdown_imac:
+    url: "http://bens-imac.local:8084/shutdown"
+    method: POST
+
+proximity:
+  home:
+    tolerance: 50
+    unit_of_measurement: m
+    devices:
+      - person.ben_wainwright
+
+lovelace:
+  resources:
+    - url: /local/lovelace-card-tools/card-tools.js
+      type: module
+    - url: /local/community/lovelace-mushroom/mushroom.js
+      type: module
+    - url: /local/js/bounce.js
+      type: module
+  dashboards:
+    mobile-dashboard:
+      mode: yaml
+      filename: dashboards/mobile.yaml
+      show_in_sidebar: true
+      title: Mobile
+    main-dashboard:
+      mode: yaml
+      filename: dashboards/main.yaml
+      show_in_sidebar: true
+      title: Main
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+shell_command:
+  imac_off: ssh bennonadmin@bens-imac.local shutdown -h now
+
+input_boolean:
+  in_bed:
+    name: In Bed
+    icon: mdi:bed
+    initial: false
+  done_good_morning:
+    name: Have I had my good morning message
+
+recorder:
+  db_url: !secret mariadb_url
+
+notify:
+  - name: email
+    platform: smtp
+    server: smtp.gmail.com
+    sender: bwainwright28@gmail.com
+    recipient: bwainwright28@gmail.com
+    port: 587
+    timeout: 15
+    sender_name: Ben Wainwright
+    username: bwainwright28@gmail.com
+    password: !secret gmail_password
+    encryption: starttls
+
+wake_on_lan:
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+# Dummy entity to enable logging that I can filter
+sensor:
+  - platform: template
+    sensors:
+      automation_log_entity:
+        unique_id: "node-red-logging-entity"
+        friendly_name: "Node Red Logging"
+        value_template: "on"
+
+http:
+  server_port: 80
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 172.30.33.0/24
+
+homeassistant:
+  # auth_providers:
+  #  - type: trusted_networks
+  #    trusted_networks:
+  #      - 192.168.1.0/24
+  #
+  #    allow_bypass_login: true
+  #    trusted_users:
+  #      192.168.1.113: 9a9adad4cf9f4877a677481fdb37f6bd
+  #      192.168.1.116: 9a9adad4cf9f4877a677481fdb37f6bd
+
+  name: Home
+  latitude: 53.4791973
+  longitude: -2.2213431
+  elevation: 54
+  unit_system: metric
+  currency: GBP
+  country: GB
+  time_zone: "Europe/London"
+  external_url: "https://home.benwainwright.me/"
+  internal_url: "http://homeassistant.local"
+
+# webostv:
+#   host: 192.168.1.159
+#   name: LG Smart TV
+#   turn_on_action:
+#     service: wake_on_lan.send_magic_packet
+#     data:
+#       mac: 64:95:6C:49:51:E0
+
+device_sun_light_trigger:
+  light_group: light.living_room_2
+  light_profile: relax
+  device_group: group.ben
+
+zone:
+  - name: Home
+    latitude: 53.4791973
+    longitude: -2.2213431
+    radius: 35
+    icon: mdi:account-multiple
+
+group:
+  ben:
+    name: "Ben"
+    entities:
+      - person.ben_wainwright
+
+withings:
+  use_webhook: true

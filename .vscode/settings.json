@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "*.yaml": "home-assistant"
+  },
+  "vscode-home-assistant.hostUrl": "https://home.benwainwright.me/",
+  "vscode-home-assistant.longLivedAccessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIwNjJiYmE4YjBmMjc0NzZkYjY0YTVhYTcxN2NhZWEyZCIsImlhdCI6MTcwMTIwMTcyOSwiZXhwIjoyMDE2NTYxNzI5fQ.Ig5XIY1mztnh5w54JWTrCTjXhyFGH3LvaLuf_5oeQ2s"
+}
