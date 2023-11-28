@@ -1,5 +1,5 @@
 FROM ghcr.io/home-assistant/home-assistant:stable 
-COPY ./* /config/
+COPY ./ /config/
 
 COPY entrypoint.sh /entrypoint.sh
 
