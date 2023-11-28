@@ -25,4 +25,4 @@ jobs:
 
       - name: Home assistant configuration check
         run: |
-          docker-compose --project-directory ./check up
+          docker-compose --build --project-directory ./check up --abort-on-container-exit
