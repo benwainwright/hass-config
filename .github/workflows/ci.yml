@@ -19,3 +19,8 @@ jobs:
 
       - run: mv fakesecrets.yaml secrets.yaml
       - run: pip3 install homeassistant-cli
+
+      - name: 🏃‍ Home Assistant Core Configuration Check
+        run: |
+          ha core check
+          ha core check --config ./
