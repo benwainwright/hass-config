@@ -16,7 +16,9 @@ jobs:
     steps:
       - name: ⤵️ Check out configuration from GitHub
         uses: actions/checkout@v3
+
       - run: mv fakesecrets.yaml secrets.yaml
+      - run: "options(error_on_lint=TRUE);"
       - name: 🚀 Run Home Assistant Configuration Check
         uses: kpucynski/action-ha-config-check@master
         with:
