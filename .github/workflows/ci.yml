@@ -17,10 +17,6 @@ jobs:
       - name: ⤵️ Check out configuration from GitHub
         uses: actions/checkout@v3
 
-      - run: mv fakesecrets.yaml secrets.yaml
-      - run: pip3 install homeassistant-cli
-
       - name: 🏃‍ Home Assistant Core Configuration Check
         run: |
-          ha core check
-          ha core check --config ./
+          docker-compose --project-directory ./check up
