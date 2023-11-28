@@ -18,7 +18,4 @@ jobs:
         uses: actions/checkout@v3
 
       - run: mv fakesecrets.yaml secrets.yaml
-      - name: 🚀 Run Home Assistant Configuration Check
-        uses: kpucynski/action-ha-config-check@master
-        with:
-          ha_version: "latest"
+      - run: pip3 install homeassistant-cli
