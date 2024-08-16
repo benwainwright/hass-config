@@ -94,15 +94,16 @@ sensor:
         value_template: "on"
 
 homeassistant:
-  # auth_providers:
-  #  - type: trusted_networks
-  #    trusted_networks:
-  #      - 192.168.1.0/24
-  #
-  #    allow_bypass_login: true
-  #    trusted_users:
-  #      192.168.1.113: 9a9adad4cf9f4877a677481fdb37f6bd
-  #      192.168.1.116: 9a9adad4cf9f4877a677481fdb37f6bd
+  auth_providers:
+    - type: trusted_networks
+      trusted_networks:
+        - 192.168.0.0/24
+        - 127.0.0.1
+        - ::1
+      allow_bypass_login: true
+      trusted_users:
+        192.168.1.121: 9a9adad4cf9f4877a677481fdb37f6bd
+    - type: homeassistant
 
   name: Home
   latitude: 53.4791973
@@ -114,14 +115,6 @@ homeassistant:
   time_zone: "Europe/London"
   external_url: "https://home.benwainwright.me/"
   internal_url: "http://homeassistant.local"
-
-# webostv:
-#   host: 192.168.1.159
-#   name: LG Smart TV
-#   turn_on_action:
-#     service: wake_on_lan.send_magic_packet
-#     data:
-#       mac: 64:95:6C:49:51:E0
 
 device_sun_light_trigger:
   light_group: light.living_room_2
