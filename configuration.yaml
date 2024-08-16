@@ -105,6 +105,7 @@ homeassistant:
         - ::1
       trusted_users:
         192.168.1.121: 9a9adad4cf9f4877a677481fdb37f6bd
+        127.0.0.1: 9a9adad4cf9f4877a677481fdb37f6bd
       allow_bypass_login: true
     # - type: homeassistant
 
