@@ -8,3 +8,5 @@
 
 # Ensure that files in subdirectories are not ignored
 !*/
+
+secrets.yaml
