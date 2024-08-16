@@ -8,11 +8,6 @@ switch: !include switch.yaml
 intent_script: !include intent-scripts.yaml
 ios: !include ios.yaml
 
-logger:
-  logs:
-    pyatv: debug
-    homeassistant.components.apple_tv: debug
-
 rest_command:
   shutdown_imac:
     url: "http://bens-imac.local:8084/shutdown"
