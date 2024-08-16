@@ -100,10 +100,10 @@ homeassistant:
         - 192.168.1.0/24
         - 127.0.0.1
         - ::1
-      allow_bypass_login: true
       trusted_users:
         192.168.1.121: 9a9adad4cf9f4877a677481fdb37f6bd
-    - type: homeassistant
+      allow_bypass_login: true
+    # - type: homeassistant
 
   name: Home
   latitude: 53.4791973
