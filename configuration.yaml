@@ -9,7 +9,7 @@ intent_script: !include intent-scripts.yaml
 ios: !include ios.yaml
 
 logger:
-  default: info
+  default: debug
 
 rest_command:
   shutdown_imac:
