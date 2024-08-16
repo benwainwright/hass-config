@@ -25,11 +25,6 @@ proximity:
     devices:
       - person.ben_wainwright
 
-stt:
-  - platform: google_cloud_stt
-    key_file: gcloud-api-key.json
-    model: command_and_search
-
 service: tts.speak
 target:
   entity_id: tts.living_room
