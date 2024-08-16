@@ -68,7 +68,7 @@ input_boolean:
     name: Have I had my good morning message
 
 recorder:
-  db_url: mysql://homeassistant:homeassistant@core-mariadb/homeassistant?charset=utf8mb4
+  db_url: !secret mariadb_url
 
 notify:
   - name: email
