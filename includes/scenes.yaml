@@ -1,0 +1,394 @@
+- id: "1678139668697"
+  name: Bedroom Lights Off
+  entities:
+    light.bedroom_ceiling_left:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+        - None
+        - candle
+        - fire
+      supported_color_modes:
+        - color_temp
+        - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Bedroom Ceiling Left
+      supported_features: 44
+      state: "off"
+    light.bedroom_ceiling_right:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+        - None
+        - candle
+        - fire
+      supported_color_modes:
+        - color_temp
+        - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Bedroom Ceiling Right
+      supported_features: 44
+      state: "off"
+    light.bedroom_wall_left:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+        - color_temp
+        - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Bedroom wall left
+      supported_features: 40
+      state: "off"
+    light.bedroom_wall_right:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+        - color_temp
+        - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Bedroom wall right
+      supported_features: 40
+      state: "off"
+  icon: mdi:alarm-light-off
+  metadata: {}
+- id: "1678148933257"
+  name: TV Lights
+  entities:
+    light.kitchen_spotlight_dishwasher:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+        - None
+        - candle
+        - fire
+        - unknown
+      supported_color_modes:
+        - color_temp
+        - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Kitchen Spotlight (Dishwasher)
+      supported_features: 44
+      state: "off"
+    light.kitchen_spotlight_fridge:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+        - None
+        - candle
+        - fire
+        - unknown
+      supported_color_modes:
+        - color_temp
+        - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Kitchen Spotlight (Fridge)
+      supported_features: 44
+      state: "off"
+    light.kitchen_spotlight_oven:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+        - None
+        - candle
+        - fire
+        - unknown
+      supported_color_modes:
+        - color_temp
+        - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Kitchen Spotlight (Oven)
+      supported_features: 44
+      state: "off"
+    light.kitchen_spotlight_sink:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+        - None
+        - candle
+        - fire
+        - unknown
+      supported_color_modes:
+        - color_temp
+        - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Kitchen Spotlight (Sink)
+      supported_features: 44
+      state: "off"
+    light.living_room_back_wall_left:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+        - None
+        - candle
+        - fire
+        - unknown
+      supported_color_modes:
+        - color_temp
+        - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Living Room Back Wall (Left)
+      supported_features: 44
+      color_mode: color_temp
+      brightness: 51
+      color_temp_kelvin: 2000
+      color_temp: 500
+      hs_color:
+        - 30.601
+        - 94.547
+      rgb_color:
+        - 255
+        - 136
+        - 13
+      xy_color:
+        - 0.599
+        - 0.382
+      effect: None
+      state: "on"
+    light.living_room_back_wall_right:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+        - None
+        - candle
+        - fire
+        - unknown
+      supported_color_modes:
+        - color_temp
+        - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Living Room Back Wall (Right)
+      supported_features: 44
+      color_mode: color_temp
+      brightness: 51
+      color_temp_kelvin: 2000
+      color_temp: 500
+      hs_color:
+        - 30.601
+        - 94.547
+      rgb_color:
+        - 255
+        - 136
+        - 13
+      xy_color:
+        - 0.599
+        - 0.382
+      effect: None
+      state: "on"
+    light.living_room_back_wall_middle:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+        - None
+        - candle
+        - fire
+        - unknown
+      supported_color_modes:
+        - color_temp
+        - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Living Room Back Wall (Middle)
+      supported_features: 44
+      color_mode: color_temp
+      brightness: 51
+      color_temp_kelvin: 2000
+      color_temp: 500
+      hs_color:
+        - 30.601
+        - 94.547
+      rgb_color:
+        - 255
+        - 136
+        - 13
+      xy_color:
+        - 0.599
+        - 0.382
+      effect: None
+      state: "on"
+    light.living_room_tv:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+        - None
+        - candle
+        - fire
+        - unknown
+      supported_color_modes:
+        - color_temp
+        - xy
+      mode: normal
+      dynamics: none
+      friendly_name: Living Room TV Wall
+      supported_features: 44
+      state: "off"
+    light.living_room_floor_lamp_bottom:
+      effect_list:
+        - None
+        - candle
+      supported_color_modes:
+        - brightness
+      friendly_name: Floor Lamp (Bottom Bulb)
+      supported_features: 44
+      mode: normal
+      dynamics: none
+      state: "off"
+    light.living_room_floor_lamp_middle:
+      effect_list:
+        - None
+        - candle
+      supported_color_modes:
+        - brightness
+      friendly_name: Floor Lamp (Middle Bulb)
+      supported_features: 44
+      mode: normal
+      dynamics: none
+      state: "off"
+    light.living_room_floor_lamp_top:
+      effect_list:
+        - None
+        - candle
+      supported_color_modes:
+        - brightness
+      friendly_name: Floor Lamp (Top Bulb)
+      supported_features: 44
+      mode: normal
+      dynamics: none
+      state: "off"
+    light.media_cabinet_lamp:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4504
+      min_mireds: 222
+      max_mireds: 454
+      effect_list:
+        - None
+        - candle
+      supported_color_modes:
+        - color_temp
+      mode: normal
+      dynamics: none
+      friendly_name: Media Cabinet Lamp
+      supported_features: 44
+      state: "off"
+    light.bookcase_lamp:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4504
+      min_mireds: 222
+      max_mireds: 454
+      effect_list:
+        - None
+        - candle
+      supported_color_modes:
+        - color_temp
+      mode: normal
+      dynamics: none
+      friendly_name: Bookcase Lamp
+      supported_features: 44
+      state: "off"
+  icon: mdi:television
+  metadata: {}
+- id: "1679363907607"
+  name: New Scene
+  entities:
+    light.bedroom_ceiling_left:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+        - None
+        - candle
+        - fire
+      supported_color_modes:
+        - color_temp
+        - xy
+      color_mode: color_temp
+      brightness: 255
+      color_temp_kelvin: 2732
+      color_temp: 366
+      hs_color:
+        - 28.327
+        - 64.71
+      rgb_color:
+        - 255
+        - 167
+        - 89
+      xy_color:
+        - 0.524
+        - 0.387
+      effect: None
+      mode: normal
+      dynamics: none
+      friendly_name: Bedroom Ceiling Left
+      supported_features: 44
+      state: "on"
+    light.bedroom_ceiling_right:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+        - None
+        - candle
+        - fire
+      supported_color_modes:
+        - color_temp
+        - xy
+      color_mode: color_temp
+      brightness: 255
+      color_temp_kelvin: 2732
+      color_temp: 366
+      hs_color:
+        - 28.327
+        - 64.71
+      rgb_color:
+        - 255
+        - 167
+        - 89
+      xy_color:
+        - 0.524
+        - 0.387
+      effect: None
+      mode: normal
+      dynamics: none
+      friendly_name: Bedroom Ceiling Right
+      supported_features: 44
+      state: "on"
+  metadata:
+    light.bedroom_ceiling_left:
+      entity_only: true
+    light.bedroom_ceiling_right:
+      entity_only: true

@@ -1,0 +1,627 @@
+- id: '1723502566500'
+  alias: Notify me when the front door unlocks
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.nuki_front_door_state
+    to: unlocked
+    from: locked
+    alias: When the front door unlocks
+  condition: []
+  action:
+  - alias: Send notification to the TV
+    action: notify.lg_webos_smart_tv
+    data:
+      message: The front door was unlocked by {{ states("sensor.nuki_front_door_last_unlock_user")
+        }}
+  - alias: Send notification to my phone
+    action: notify.mobile_app_bens_iphone
+    metadata: {}
+    data:
+      message: The front door was unlocked by {{ states("sensor.nuki_front_door_last_unlock_user")
+        }}
+  mode: single
+- id: '1723502726671'
+  alias: Notify me when the front door locks
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - lock.front_door
+    from: locking
+    to: locked
+    alias: When the front door locks
+  condition: []
+  action:
+  - alias: Send notification to the TV
+    action: notify.lg_webos_smart_tv
+    data:
+      message: The front door was locked
+  - alias: Send notification to my phone
+    action: notify.mobile_app_bens_iphone
+    metadata: {}
+    data:
+      message: The front door was locked
+  mode: single
+- id: '1723537362263'
+  alias: Trigger TV mode from Apple TV
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - media_player.apple_tv
+    alias: When my Apple TV changes state
+  condition: []
+  action:
+  - if:
+    - condition: state
+      entity_id: media_player.apple_tv
+      state: playing
+      alias: My Apple TV is playing
+    - alias: And either one of
+      condition: or
+      conditions:
+      - condition: template
+        value_template: '{{ state_attr(''media_player.apple_tv'', ''app_id'') == ''com.amazon.aiv.AIVApp''
+          }}'
+        alias: The 'app_id' is 'com.amazon.aiv.AIVApp'
+      - condition: template
+        value_template: '{{ state_attr(''media_player.apple_tv'', ''media_content_type'')
+          != none }}'
+        alias: Or there is a 'media_content_id'
+    then:
+    - action: input_boolean.turn_on
+      target:
+        entity_id:
+        - input_boolean.tv_mode_on
+      data: {}
+      alias: Turn on TV mode
+    else:
+    - action: input_boolean.turn_off
+      target:
+        entity_id:
+        - input_boolean.tv_mode_on
+      data: {}
+      alias: Turn off TV mode
+    alias: Turn TV mode on or off depending on whether it is playing or not
+  mode: single
+- id: '1723569814335'
+  alias: When TV mode turns on
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.tv_mode_on
+    to: 'on'
+  condition: []
+  action:
+  - action: scene.turn_on
+    metadata: {}
+    target:
+      entity_id: scene.tv_lights
+    alias: Turn on TV lights
+  - alias: Pause music in the living room
+    action: media_player.media_pause
+    metadata: {}
+    data: {}
+    target:
+      device_id:
+      - 88abe87000812f54c121869a538e96bf
+      - 80de9a56eb3d7056728821b5b211f502
+  - action: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.adaptive_lighting_living_room
+    alias: Turn off adaptive lighting in the living room
+  - action: input_text.set_value
+    metadata: {}
+    data:
+      value: '{{ state_attr(''media_player.spotify_ben_wainwright'', ''media_content_id'')
+        }}'
+    target:
+      entity_id: input_text.spotify_paused_track_id
+    alias: Save the track ID of the playing track on Spotify
+  - action: input_text.set_value
+    metadata: {}
+    data:
+      value: '{{ state_attr(''media_player.spotify_ben_wainwright'', ''media_content_type'')
+        }}'
+    target:
+      entity_id: input_text.spotify_paused_track_type
+    alias: Save the track type of the playing track on Spotify
+  mode: single
+- id: '1723569971439'
+  alias: When TV mode turns off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.tv_mode_on
+    to: 'off'
+    alias: When TV mode turns off
+  condition: []
+  action:
+  - action: switch.turn_on
+    target:
+      entity_id: switch.adaptive_lighting_living_room
+    data: {}
+    alias: Turn on adaptive lighting in the living room
+    enabled: true
+  - alias: Turn on lights in living room
+    action: light.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.living_room
+  - action: media_player.play_media
+    metadata: {}
+    data:
+      media_content_id: '{{ states(''input_text.spotify_paused_track_id'') }}'
+      media_content_type: '{{ states(''input_text.spotify_paused_track_type'') }}'
+    target:
+      device_id: 80de9a56eb3d7056728821b5b211f502
+    alias: Play paused track
+  - alias: Clear paused track ID
+    action: input_text.set_value
+    metadata: {}
+    data:
+      value: '""'
+    target:
+      entity_id: input_text.spotify_paused_track_id
+  - alias: Clear paused track type
+    action: input_text.set_value
+    metadata: {}
+    data:
+      value: '""'
+    target:
+      entity_id: input_text.spotify_paused_track_type
+  mode: single
+- id: '1723575149974'
+  alias: New Automation
+  description: ''
+  trigger:
+  - alias: When my PS5 changes state
+    platform: state
+    entity_id:
+    - media_player.wearing_clapper2_ps5_console
+  condition: []
+  action:
+  - alias: Turn TV mode on or off depending on whether I'm using the PS5 or not
+    if:
+    - alias: I'm using my PS5
+      condition: state
+      entity_id: media_player.wearing_clapper2_ps5_console
+      state: playing
+    then:
+    - action: input_boolean.turn_on
+      target:
+        entity_id:
+        - input_boolean.tv_mode_on
+      data: {}
+      alias: Turn on TV mode
+    else:
+    - action: input_boolean.turn_off
+      target:
+        entity_id:
+        - input_boolean.tv_mode_on
+      data: {}
+      alias: Turn off TV mode
+  mode: single
+- id: '1723575404152'
+  alias: Trigger TV mode from XBOX
+  description: ''
+  trigger:
+  - alias: When my XBOX changes state
+    platform: state
+    entity_id:
+    - binary_sensor.sordidhydra4706_in_game
+  condition: []
+  action:
+  - alias: Turn TV mode on or off depending on whether I'm using the XBOX or not
+    if:
+    - alias: I'm using my XBOX
+      condition: state
+      entity_id: binary_sensor.sordidhydra4706_in_game
+      state: 'on'
+    then:
+    - action: input_boolean.turn_on
+      target:
+        entity_id:
+        - input_boolean.tv_mode_on
+      data: {}
+      alias: Turn on TV mode
+    else:
+    - action: input_boolean.turn_off
+      target:
+        entity_id:
+        - input_boolean.tv_mode_on
+      data: {}
+      alias: Turn off TV mode
+  mode: single
+- id: '1723576490056'
+  alias: Reset adaptive lighting every morning
+  description: ''
+  trigger:
+  - platform: time
+    at: 05:00:00
+    alias: At 5am every day
+  condition: []
+  action:
+  - action: switch.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id:
+      - switch.adaptive_lighting_living_room
+      - switch.adaptive_lighting_hallway
+      - switch.adaptive_lighting_bedroom
+      - switch.adaptive_lighting_bathroom
+    alias: Turn adaptive lighting back on
+  mode: single
+- id: '1723577167452'
+  alias: Bedroom motion sensor
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.bedroom_sensor_sensor_state_motion
+    to: 'on'
+    alias: When motion is detected in the bedroom
+  condition:
+  - condition: state
+    entity_id: input_boolean.bedroom_motion_sensor
+    state: 'on'
+    alias: And the bedroom motion sensor switch is on
+  action:
+  - action: light.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.bedroom
+    alias: Turn on the bedroom lights
+  - delay:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+    alias: Wait for five minutes
+  - action: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.bedroom
+    alias: Turn off the bedroom lights
+  mode: restart
+- id: '1723577438952'
+  alias: Living room motion sensor
+  description: ''
+  trigger:
+  - alias: When motion is detected in the living room
+    platform: state
+    entity_id:
+    - binary_sensor.living_room_sensor_sensor_state_motion
+    to: 'on'
+  condition:
+  - alias: And the bedroom motion sensor switch is on
+    condition: state
+    entity_id: input_boolean.living_room_motion_sensor
+    state: 'on'
+  action:
+  - alias: Turn on the bedroom lights
+    action: light.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.living_room
+  - alias: Wait for five minutes
+    delay:
+      hours: 0
+      minutes: 30
+      seconds: 0
+      milliseconds: 0
+  - alias: Turn off the bedroom lights
+    action: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.living_room
+  mode: restart
+- id: '1723577948124'
+  alias: Bathroom motion sensor
+  description: ''
+  trigger:
+  - alias: When motion is detected in the bathroom
+    platform: state
+    entity_id:
+    - binary_sensor.bathroom_motion_sensor_occupancy
+    to: 'on'
+  condition:
+  - alias: And the bathroom motion sensor switch is on
+    condition: state
+    entity_id: input_boolean.bathroom_motion_sensor
+    state: 'on'
+  action:
+  - alias: Turn on the bathroom lights
+    action: light.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.main_bathroom
+  - alias: Wait for five minutes
+    delay:
+      hours: 0
+      minutes: 30
+      seconds: 0
+      milliseconds: 0
+  - alias: Turn off the bathroom lights
+    action: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.main_bathroom
+  mode: restart
+- id: '1723578051487'
+  alias: Hallway motion sensor
+  description: ''
+  trigger:
+  - alias: When motion is detected in the hallway
+    platform: state
+    entity_id:
+    - binary_sensor.hallway_motion_sensor_occupancy
+    to: 'on'
+  condition:
+  - alias: And the hallway motion sensor switch is on
+    condition: state
+    entity_id: input_boolean.hallway_motion_sensor
+    state: 'on'
+  action:
+  - alias: Turn on the hallway lights
+    action: light.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.hallway
+  - alias: Wait for two minutes
+    delay:
+      hours: 0
+      minutes: 2
+      seconds: 0
+      milliseconds: 0
+  - alias: Turn off the hallway lights
+    action: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.hallway
+  mode: restart
+- id: '1723582691980'
+  alias: Cleaning mode
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.cleaning_mode
+    alias: Cleaning mode changes state
+  condition: []
+  action:
+  - if:
+    - condition: state
+      entity_id: input_boolean.cleaning_mode
+      state: 'on'
+      alias: If cleaning mode is on
+    then:
+    - action: switch.turn_off
+      metadata: {}
+      data: {}
+      target:
+        entity_id:
+        - switch.adaptive_lighting_living_room
+        - switch.adaptive_lighting_bedroom
+        - switch.adaptive_lighting_hallway
+        - switch.adaptive_lighting_bathroom
+      alias: Turn off adaptive lighting in all rooms
+    - action: light.turn_on
+      metadata: {}
+      data:
+        kelvin: 6500
+        brightness_pct: 100
+      target:
+        entity_id:
+        - light.main_bathroom
+        - light.bedroom
+        - light.gym_lights
+        - light.hallway
+        - light.living_room
+      alias: Turn all the lights in the flat on full
+    - action: input_boolean.turn_off
+      target:
+        entity_id:
+        - input_boolean.bathroom_motion_sensor
+        - input_boolean.bedroom_motion_sensor
+        - input_boolean.living_room_motion_sensor
+        - input_boolean.hallway_motion_sensor
+      data: {}
+      alias: Turn off all motion sensors
+    else:
+    - action: switch.turn_on
+      metadata: {}
+      data: {}
+      target:
+        entity_id:
+        - switch.adaptive_lighting_living_room
+        - switch.adaptive_lighting_bedroom
+        - switch.adaptive_lighting_hallway
+        - switch.adaptive_lighting_bathroom
+      alias: Turn on adaptive lighting in all rooms
+    - action: light.turn_off
+      metadata: {}
+      target:
+        entity_id:
+        - light.main_bathroom
+        - light.bedroom
+        - light.gym_lights
+        - light.hallway
+        - light.living_room
+      alias: Turn all the lights in the flat off
+    - action: input_boolean.turn_on
+      target:
+        entity_id:
+        - input_boolean.bathroom_motion_sensor
+        - input_boolean.hallway_motion_sensor
+      data: {}
+      alias: Turn on all motion sensors
+  mode: single
+- id: '1723583172539'
+  alias: Trigger cleaning mode on unlock by cleaner
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.nuki_front_door_state
+    from: locked
+    to: unlocked
+    alias: When the front door is unlocked
+  condition:
+  - condition: state
+    entity_id: sensor.nuki_front_door_last_unlock_user
+    state: Cleaner
+    alias: If the user that unlocked the door was cleaner
+  action:
+  - action: input_boolean.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: input_boolean.cleaning_mode
+    alias: Turn on cleaning mode
+  - delay:
+      hours: 3
+      minutes: 15
+      seconds: 0
+      milliseconds: 0
+    alias: Wait for three hours 15 minutes
+  - action: input_boolean.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: input_boolean.cleaning_mode
+    alias: Turn off cleaning mode
+  mode: single
+- id: '1723669402717'
+  alias: Holiday mode
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.holiday_mode
+    alias: If “holiday mode” toggle changes state
+  condition: []
+  action:
+  - alias: Check the state of “holiday mode”
+    if:
+    - condition: state
+      entity_id: input_boolean.holiday_mode
+      state: 'on'
+      alias: If it is “on”
+    then:
+    - action: light.turn_off
+      metadata: {}
+      data: {}
+      target:
+        area_id:
+        - bedroom
+        - main_bathroom
+        - en_suite
+        - gym
+        - hallway
+        - living_room
+      alias: Turn off all the lights in the flat
+    - action: climate.turn_off
+      target:
+        entity_id:
+        - climate.bedroom
+        - climate.boiler
+        - climate.gym
+        - climate.living_room
+      data: {}
+      alias: Turn off all the thermostats in the flat
+    - action: scheduler.disable_all
+      metadata: {}
+      data: {}
+      alias: Disable all schedulers
+    - action: switch.turn_off
+      metadata: {}
+      data: {}
+      target:
+        entity_id:
+        - switch.bedroom_heating_switch
+        - switch.living_room_heating_switch
+      alias: Turn off all the heaters
+    - alias: Notify me
+      action: notify.notify
+      metadata: {}
+      data:
+        message: Holiday mode turned on. Enjoy your time away!
+        title: Holiday mode
+    else:
+    - action: climate.turn_on
+      target:
+        entity_id:
+        - climate.bedroom
+        - climate.boiler
+        - climate.gym
+        - climate.living_room
+      data: {}
+      alias: Turn on all thermostats
+    - action: scheduler.enable_all
+      metadata: {}
+      data: {}
+      alias: Re-enable all schedulers
+    - action: notify.notify
+      metadata: {}
+      data:
+        message: Holiday mode turned off… welcome home!
+        title: Holiday mode
+      alias: Notify me
+  mode: single
+- id: '1723669686853'
+  alias: Trigger holiday mode if I leave Manchester
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id:
+    - proximity.home
+    above: 20000
+    alias: When I’m more than 20km away from home
+  condition: []
+  action:
+  - action: input_boolean.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: input_boolean.holiday_mode
+    alias: Turn on holiday mode
+  mode: single
+- id: '1723825840667'
+  alias: Turn holiday mode back on when returning home
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id:
+    - proximity.home
+    below: 20000
+    alias: When I’m less than 20km away from home
+  condition:
+  - condition: state
+    entity_id: input_boolean.holiday_mode
+    state: 'on'
+    alias: And holiday mode is on
+  action:
+  - action: input_boolean.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: input_boolean.holiday_mode
+    alias: Turn off holiday mode
+  mode: single

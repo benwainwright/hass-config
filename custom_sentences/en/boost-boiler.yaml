@@ -1,0 +1,9 @@
+language: "en"
+intents:
+  BoostBoiler:
+    data:
+      - sentences:
+          - "Boost boiler"
+          - "Boost the boiler"
+          - "Boost the water heater"
+          - "Boost water heating"

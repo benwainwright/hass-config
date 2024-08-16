@@ -1,0 +1,60 @@
+title: Mobile
+theme: scroll_lock
+views:
+  - title: Home
+    cards:
+      - type: vertical-stack
+        cards:
+        - type: vertical-stack
+          title: Lights
+          cards:
+            - type: custom:mushroom-light-card
+              entity: light.living_room
+              show_brightness_control: true
+              icon: mdi:wall-sconce-flat
+              layout: horizontal
+              name: Living Room
+            - type: custom:mushroom-light-card
+              entity: light.bedroom
+              show_brightness_control: true
+              icon: mdi:wall-sconce-flat
+              layout: horizontal
+              name: Bedroom
+            - type: custom:mushroom-light-card
+              entity: light.hallway
+              show_brightness_control: true
+              icon: mdi:wall-sconce-flat
+              layout: horizontal
+              name: Hallway
+            - type: custom:mushroom-light-card
+              entity: light.main_bathroom
+              show_brightness_control: true
+              use_light_color: true
+              icon: mdi:wall-sconce-flat
+              layout: horizontal
+              name: Bathroom
+        - type: grid
+          title: Heating
+          columns: 2
+          square: false
+          cards:
+            - type: custom:mushroom-climate-card
+              entity: climate.living_room
+              name: Living Room
+            - type: custom:mushroom-climate-card
+              entity: climate.bedroom
+              name: Bedroom
+            - type: custom:mushroom-climate-card
+              entity: climate.gym
+              name: Gym
+            - type: custom:mushroom-climate-card
+              entity: climate.boiler
+              name: Boiler
+
+        - type: grid
+          title: Actions
+          columns: 2
+          square: false
+          cards:
+            - type: custom:mushroom-entity-card
+              entity: button.heating_off

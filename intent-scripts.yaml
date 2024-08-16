@@ -1,0 +1,24 @@
+IWantToSee:
+  action:
+    service: "button.press"
+    data:
+      entity_id: button.i_want_to_see
+  speech:
+    text: "OK! Turning off lighting automation in the living room for 15 minutes"
+
+BoostBoiler:
+  action:
+    service: "button.press"
+    data:
+      entity_id: button.boiler_boost
+  speech:
+    text: "OK! Boosting the boiler for 30 minutes"
+
+PlayOnTv:
+  action:
+    service: mqtt.publish
+    data:
+      qos: 0
+      retain: false
+      topic: AppleTvSearch
+      payload: '{ "title": "{{ title }}" }'

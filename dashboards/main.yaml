@@ -1,0 +1,97 @@
+title: Desktop
+views:
+  - title: Overview
+    type: custom:grid-layout
+    layout:
+      grid-template-columns: auto auto auto 
+      grid-template-rows: auto
+      grid-gap: 40px
+      grid-template-areas: |
+        "header header header"
+        "left main right"
+        "footer footer footer"
+      mediaquery:
+        "(max-width: 600px)":
+          grid-template-columns: 100%
+          grid-template-areas: |
+            "header"
+            "left"
+            "main"
+            "right"
+            "footer"
+        "(max-width: 800px)":
+          grid-template-columns: 50% 50%
+          grid-template-areas: |
+            "header left"
+            "main right"
+            "footer footer"
+    cards:
+    - type: vertical-stack
+      title: Living Room
+      view_layout:
+        grid-area: left
+      cards:
+        - type: custom:mushroom-chips-card
+          view_layout:
+            grid-area: chips
+          chips:
+            - type: entity
+              entity: sensor.living_room_sensor_illuminance
+            - type: entity
+              entity: binary_sensor.living_room_sensor_sensor_state_motion
+        - type: grid
+          view_layout:
+            grid-area: content
+          columns: 2
+          square: false
+          cards:
+            - type: custom:mushroom-light-card
+              entity: light.living_room
+              show_brightness_control: true
+              icon: mdi:wall-sconce-flat
+              use_light_color: true
+              show_color_temp_control: true
+              show_color_control: true
+              show_brightness_control: true
+              name: Lights
+            - type: custom:mushroom-climate-card
+              entity: climate.living_room
+              show_temperature_control: true
+              name: Thermostat
+
+
+
+    - type: vertical-stack
+      title: Bedroom
+      view_layout:
+        grid-area: main
+      cards:
+        - type: custom:mushroom-chips-card
+          view_layout:
+            grid-area: chips
+          chips:
+            - type: entity
+              entity: sensor.bedroom_sensor_illuminance
+            - type: entity
+              entity: binary_sensor.bedroom_sensor_sensor_state_motion
+            - type: entity
+              entity: binary_sensor.in_bed
+        - type: grid
+          view_layout:
+            grid-area: content
+          columns: 2
+          square: false
+          cards:
+            - type: custom:mushroom-light-card
+              entity: light.bedroom
+              show_brightness_control: true
+              icon: mdi:wall-sconce-flat
+              use_light_color: true
+              show_color_temp_control: true
+              show_color_control: true
+              show_brightness_control: true
+              name: Lights
+            - type: custom:mushroom-climate-card
+              entity: climate.bedroom
+              show_temperature_control: true
+              name: Thermostat
