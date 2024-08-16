@@ -57,6 +57,7 @@ default_config:
 
 shell_command:
   imac_off: ssh bennonadmin@bens-imac.local shutdown -h now
+  update_config: git pull origin main
 
 input_boolean:
   in_bed:
