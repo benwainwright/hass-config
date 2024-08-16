@@ -1,0 +1,87 @@
+turn_tv_on:
+  alias: Turn TV On
+  sequence:
+  - service: wake_on_lan.send_magic_packet
+    data:
+      broadcast_port: 9
+      mac: 2C:2B:F9:57:E7:2E
+  mode: single
+  icon: mdi:television
+turn_everything_off:
+  alias: Turn Everything Off
+  sequence:
+  - service: rest_command.shutdown_imac
+    data: {}
+    alias: Turn off iMac
+  - service: light.turn_off
+    data: {}
+    target:
+      area_id:
+      - main_bathroom
+      - en_suite
+      - bedroom
+      - gym
+      - hallway
+      - living_room
+    alias: Turn Lights Off
+  - service: media_player.media_pause
+    data: {}
+    target:
+      area_id:
+      - bedroom
+      - gym
+      - living_room
+    alias: Pause Music
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id: switch.living_room_tv_on
+    alias: Turn TV Off
+  mode: single
+  icon: mdi:power
+turn_tv_mode_on:
+  alias: Turn TV mode on
+  sequence:
+  - action: scene.turn_on
+    metadata: {}
+    target:
+      entity_id: scene.tv_lights
+    alias: Turn on TV lights
+  - alias: Pause music in the living room
+    action: media_player.media_pause
+    metadata: {}
+    data: {}
+    target:
+      device_id:
+      - 88abe87000812f54c121869a538e96bf
+      - 80de9a56eb3d7056728821b5b211f502
+  - action: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.adaptive_lighting_living_room
+    alias: Turn off adaptive lighting in the living room
+  description: ''
+  icon: mdi:television
+boost_boiler:
+  alias: Boost boiler
+  sequence:
+  - action: switch.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.boiler_boost
+    alias: Turn on the boiler boost switch
+  - delay:
+      hours: 0
+      minutes: 30
+      seconds: 0
+      milliseconds: 0
+    alias: Wait for 30 minutes
+  - action: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.boiler_boost
+    alias: Turn off the boiler boost switch
+  description: ''

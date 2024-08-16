@@ -1,0 +1,6 @@
+language: "en"
+intents:
+  IWantToSee:
+    data:
+      - sentences:
+          - "I want to see"

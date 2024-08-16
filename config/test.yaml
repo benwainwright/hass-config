@@ -1,0 +1,21 @@
+type: vertical-stack
+cards:
+  - type: entities
+    title: Tumble Dryer
+    entities:
+      - entity: sensor.tumble_dryer_machine_mode
+        name: Machine Mode
+      - entity: sensor.tumble_dryer_program
+        name: Program
+      - entity: sensor.tumble_dryer_program_phase
+        name: Program Phase
+      - entity: sensor.tumble_dryer_time_remaining
+        name: Time Remaining
+  - type: sensor
+    hours_to_show: 24
+    graph: line
+    entity: sensor.gym_sensor_illuminance
+    detail: 1
+    name: Illuminance
+
+

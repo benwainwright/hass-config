@@ -1,1 +1,10 @@
 .vscodesecrets.yaml
+# Ignore everything
+*
+
+# Except YAML and YML files
+!*.yaml
+!*.yml
+
+# Ensure that files in subdirectories are not ignored
+!*/

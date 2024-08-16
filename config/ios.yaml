@@ -1,0 +1,6 @@
+actions:
+  - name: Lock
+    background_color: "#000000"
+    label:
+      text: '{{ states("lock.front_door") }}'
+      color: "#ff0000"

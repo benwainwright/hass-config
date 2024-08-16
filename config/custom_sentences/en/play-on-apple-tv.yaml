@@ -1,0 +1,10 @@
+language: "en"
+intents:
+  PlayOnTv:
+    data:
+      - sentences:
+          - "play {title} on [the ](TV|Telly|Apple TV)"
+
+lists:
+  title:
+    wildcard: true

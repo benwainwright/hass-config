@@ -1,0 +1,13 @@
+scroll_lock:
+  card-mod-theme: scroll_lock
+  state-light-on-color: "#880808"
+  primary-color: "#880808"
+  card-mod-root-yaml: |
+    .: |
+      :host {
+        position: fixed;  # disable scrolling
+      }
+      app-header {
+        display: none;  # disable header
+      }
+
