@@ -7,6 +7,7 @@
       state: |
         {{ (now().timestamp() | round - (states("sensor.last_time_living_room_motion_sensor_was_triggered") | as_datetime).timestamp()) < 36000 or
         (states("binary_sensor.sordidhydra4706_in_game") == "on") or
+        (states("binary_sensor.bens_imac_pro_active") == "on") or
         (states("media_player.apple_tv") == "playing") or
         (states("sensor.wearing_clapper2_status") == "Playing") }}
 
