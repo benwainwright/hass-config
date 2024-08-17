@@ -13,7 +13,7 @@ ios: !include includes/ios-actions.yaml
 input_boolean: !include includes/booleans.yaml
 http: !include includes/http.yaml
 shell_command: !include includes/shell-commands.yaml
-rest_command: !include includes/rest-command.yaml
+rest_command: !include includes/rest-commands.yaml
 lovelace: !include includes/lovelace.yaml
 
 recorder:
