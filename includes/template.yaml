@@ -75,12 +75,6 @@
       unique_id: current-tv-source
       state: '{{ state_attr("media_player.lg_webos_smart_tv", "source") }}'
 
-- binary_sensor:
-    - name: "Martha Battery Low"
-      unique_id: martha-battery-low
-      state: '{{ float(states("sensor.martha_battery")) <= 1.2 }}'
-
-- sensor:
     - name: "Living Room Temperature"
       unit_of_measurement: "°C"
       unique_id: living-room-temperature
