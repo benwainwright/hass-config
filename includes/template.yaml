@@ -1,8 +1,8 @@
 ######### Living Room ###########
 
 - binary_sensor:
-    - name: "Living room occupied"
-      unique_id: living room occupied
+    - name: "Living room occupancy"
+      unique_id: living_room_occupancy
       device_class: occupancy
       state: |
         {{ (now().timestamp() | round - (states("sensor.last_time_living_room_motion_sensor_was_triggered") | as_datetime).timestamp()) < 36000 or
