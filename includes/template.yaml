@@ -8,7 +8,7 @@
     - name: "iMac Screen Off"
       unique_id: imac-screen-on
       state: '{{ state_attr("binary_sensor.bens_imac_pro_active", "Screen Off") }}'
-        
+
 - sensor:
     - name: "Todays events"
       unique_id: todays-events
@@ -20,40 +20,38 @@
         {{- state_attr(sensor, "summary") }} from {{state_attr(sensor, "start").strftime("%-I:%M:%p") }} to {{state_attr(sensor, "end").strftime("%-I:%M:%p") }}
         {%- endif -%}
         {%- endfor -%}]
-      
 
 - sensor:
-  - name: "Good Morning Message"
-    unique_id: good_morning_message
-    state: |
-      {% set data = namespace(events=[]) %}
-        {%- for n in range(10) -%}
-          {%- set sensor = 'sensor.ical_ben_s_calendar_event_' + n | string -%}
-          {%- if state_attr(sensor, "start").date() == now().date() -%}
-            {%- set data.events = data.events + [state_attr(sensor, "summary") + " from " + state_attr(sensor, "start").strftime("%-I:%M:%p") + " to " + state_attr(sensor, "end").strftime("%-I:%M:%p")] %}
-          {%- endif -%}
-      {%- endfor -%}
-        
-      Good morning!
+    - name: "Good Morning Message"
+      unique_id: good_morning_message
+      state: |
+        {% set data = namespace(events=[]) %}
+          {%- for n in range(10) -%}
+            {%- set sensor = 'sensor.ical_ben_s_calendar_event_' + n | string -%}
+            {%- if state_attr(sensor, "start").date() == now().date() -%}
+              {%- set data.events = data.events + [state_attr(sensor, "summary") + " from " + state_attr(sensor, "start").strftime("%-I:%M:%p") + " to " + state_attr(sensor, "end").strftime("%-I:%M:%p")] %}
+            {%- endif -%}
+        {%- endfor -%}
 
-      [pause] It is {{ now().strftime('%-I:%M%p') }} on {{ now().strftime('%A') }}
+        Good morning!
 
-      the {{ now().strftime('%d') | ordinal }} of {{ now().strftime('%B') }}.
+        [pause] It is {{ now().strftime('%-I:%M%p') }} on {{ now().strftime('%A') }}
 
-      [pause] The forecast for today is {{ states("sensor.weather_forecast") }}
-      with a temperature of {{ state_attr("weather.forecast_home", "temperature")
-      }} degrees celsius and a humidity of {{ state_attr("weather.forecast_home",
-      "humidity") }} percent.
+        the {{ now().strftime('%d') | ordinal }} of {{ now().strftime('%B') }}.
 
-      You have {{ data.events | length }} event{%- if data.events | length > 1 -%}s{% endif %} in your calendar today: {% for item in data.events %}
-      - {{ item }}
-      {% endfor %}
+        [pause] The forecast for today is {{ states("sensor.weather_forecast") }}
+        with a temperature of {{ state_attr("weather.forecast_home", "temperature")
+        }} degrees celsius and a humidity of {{ state_attr("weather.forecast_home",
+        "humidity") }} percent.
 
+        You have {{ data.events | length }} event{%- if data.events | length > 1 -%}s{% endif %} in your calendar today: {% for item in data.events %}
+        - {{ item }}
+        {% endfor %}
 
 - sensor:
     - name: "Weather forecast"
       unique_id: weather_forecast
-      icon: 
+      icon:
       state: |
         {%- if states("weather.forecast_home") == "clearnight" -%}clear night
         {%- elif states("weather.forecast_home") == "fog" -%}fog
