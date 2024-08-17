@@ -4,5 +4,3 @@ in_bed:
  initial: false
 done_good_morning:
   name: Have I had my good morning message
-test:
-  name: testing boolean!
