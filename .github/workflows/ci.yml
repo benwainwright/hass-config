@@ -21,7 +21,7 @@ jobs:
         run: mv ./* check || true
 
       - name: Copy fake secrets
-        run: mv check/fakkesecrets.yaml check/secrets.yaml
+        run: mv check/fakesecrets.yaml check/secrets.yaml
 
       - name: Home assistant configuration check
         run: |
