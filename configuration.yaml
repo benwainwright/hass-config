@@ -12,9 +12,6 @@ http:
   server_port: 80
   server_host: 0.0.0.0
 
-logger:
-  default: debug
-
 rest_command:
   shutdown_imac:
     url: "http://bens-imac.local:8084/shutdown"
