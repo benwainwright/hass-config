@@ -14,9 +14,17 @@ BoostBoiler:
   speech:
     text: "OK! Boosting the boiler for 30 minutes"
 
-ControlLights:
+TurnLightsOff:
   action:
-    service: light.turn_{{ trigger.slots.onOrOff }}
+    service: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      area_id: "{{ area_id(trigger.device_id) }}"
+
+TurnLightsOn:
+  action:
+    service: light.turn_on
     metadata: {}
     data: {}
     target:
