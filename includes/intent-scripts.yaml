@@ -14,6 +14,14 @@ BoostBoiler:
   speech:
     text: "OK! Boosting the boiler for 30 minutes"
 
+ControlLights:
+  action:
+    service: light.turn_{{ trigger.slots.onOrOff }}
+    metadata: {}
+    data: {}
+    target:
+      area_id: "{{ area_id(trigger.device_id) }}"
+
 PlayOnTv:
   action:
     service: mqtt.publish
