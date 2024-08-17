@@ -1,8 +1,8 @@
-- in_bed:
-    name: In Bed
-    icon: mdi:bed
-    initial: false
-- done_good_morning:
-    name: Have I had my good morning message
-- test:
-    name: testing boolean!
+in_bed:
+ name: In Bed
+ icon: mdi:bed
+ initial: false
+done_good_morning:
+  name: Have I had my good morning message
+test:
+  name: testing boolean!
