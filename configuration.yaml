@@ -102,6 +102,7 @@ sensor:
 
 homeassistant:
   auth_providers:
+    - type: homeassistant
     - type: trusted_networks
       trusted_networks:
         - 192.168.1.0/24
@@ -113,7 +114,6 @@ homeassistant:
         127.0.0.1: 9a9adad4cf9f4877a677481fdb37f6bd
         "2a01:4b00:d220:f100:d08a:a9f3:8ce6:5d28": 9a9adad4cf9f4877a677481fdb37f6bd
       allow_bypass_login: true
-    - type: homeassistant
 
   name: Home
   latitude: 53.4791973
