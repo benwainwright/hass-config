@@ -24,13 +24,6 @@ proximity:
     devices:
       - person.ben_wainwright
 
-service: tts.speak
-target:
-  entity_id: tts.living_room
-data:
-  media_player_entity_id: media_player.living_room_speaker
-  message: "May the force be with you."
-
 lovelace:
   resources:
     - url: /local/lovelace-card-tools/card-tools.js
