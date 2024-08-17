@@ -55,6 +55,7 @@
       state: |
         {%- if states("weather.forecast_home") == "clearnight" -%}clear night
         {%- elif states("weather.forecast_home") == "fog" -%}fog
+        {%- elif states("weather.forecast_home") == "cloudy" -%}cloudy
         {%- elif states("weather.forecast_home") == "hail" -%}hail
         {%- elif states("weather.forecast_home") == "lightning" -%}lightning/thunderstorms and rain
         {%- elif states("weather.forecast_home") == "lightning-rainy" -%}lightning/thunderstorms and rain
