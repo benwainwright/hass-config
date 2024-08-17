@@ -6,10 +6,10 @@ concurrency:
 
 on:
   push:
-    branches: ["main"]
+    branches: ["dev"]
 
 jobs:
-  home-assistant:
+  check-config:
     name: Home Assistant Core Configuration Check
     runs-on: ubuntu-latest
     continue-on-error: false
@@ -26,3 +26,22 @@ jobs:
       - name: Home assistant configuration check
         run: |
           docker compose --project-directory ./check up --build --abort-on-container-exit
+
+          - name: Merge development -> staging
+
+  merge:
+    name: Merge to main
+    needs: [check-config]
+    runs-on: ubuntu-latest
+    continue-on-error: false
+    steps:
+      - name: ⤵️ Check out configuration from GitHub
+        uses: actions/checkout@v3
+
+      - name: Merge dev -> main
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          from_branch: dev
+          target_branch: main
+          github_token: ${{ secrets.GITHUB_TOKEN }}
