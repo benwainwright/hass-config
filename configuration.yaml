@@ -8,6 +8,9 @@ switch: !include switch.yaml
 intent_script: !include intent-scripts.yaml
 ios: !include ios.yaml
 
+http:
+  server_port: 80
+
 logger:
   default: debug
 
