@@ -95,18 +95,13 @@
 - sensor:
     - name: "Living Room Heating Mode"
       unique_id: living-room-heating-mode
-      state: '{{ state_attr("climate.living_room", "status").mode }}'
+      state: '{{ state_attr("climate.living_room", "preset_mode") }}'
 
 ######### Bedroom ###########
 - binary_sensor:
     - name: "In Bed"
       unique_id: in-bed
       state: '{{ states.input_boolean.in_bed.state == "on" }}'
-
-- binary_sensor:
-    - name: "Bedroom Occupied"
-      unique_id: bedroom-occupied
-      state: '{{ state_attr("climate.bedroom", "status").occupied }}'
 
 - sensor:
     - name: "Bedroom Temperature"
@@ -123,14 +118,9 @@
 - sensor:
     - name: "Bedroom Heating Mode"
       unique_id: bedroom-heating-mode
-      state: '{{ state_attr("climate.bedroom", "status").mode }}'
+      state: '{{ state_attr("climate.bedroom", "preset_mode") }}'
 
 ######### Gym  ###########
-
-- binary_sensor:
-    - name: "Gym Occupied"
-      unique_id: gym-occupied
-      state: '{{ state_attr("climate.gym", "status").occupied }}'
 
 - sensor:
     - name: "Gym Temperature"
@@ -147,7 +137,7 @@
 - sensor:
     - name: "Gym Heating Mode"
       unique_id: gym-heating-mode
-      state: '{{ state_attr("climate.gym", "status").mode }}'
+      state: '{{ state_attr("climate.gym", "preset_mode") }}'
 
 - trigger:
     - platform: state
