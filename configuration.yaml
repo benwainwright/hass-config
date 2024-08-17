@@ -55,8 +55,6 @@ input_boolean:
     name: In Bed
     icon: mdi:bed
     initial: false
-  test_boolean:
-    name: test
   done_good_morning:
     name: Have I had my good morning message
 
