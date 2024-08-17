@@ -1,0 +1,2 @@
+imac_off: ssh bennonadmin@bens-imac.local shutdown -h now
+update_config: cd /config && git pull origin main

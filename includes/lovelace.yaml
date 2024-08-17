@@ -1,0 +1,7 @@
+resources:
+  - url: /local/lovelace-card-tools/card-tools.js
+    type: module
+  - url: /local/community/lovelace-mushroom/mushroom.js
+    type: module
+  - url: /local/js/bounce.js
+    type: module
