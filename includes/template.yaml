@@ -10,6 +10,26 @@
       state: '{{ state_attr("binary_sensor.bens_imac_pro_active", "Screen Off") }}'
 
 - sensor:
+    - name: "Weather forecast"
+      unique_id: weather_forecast
+      state: |
+        {%- if states("weather.forecast_home") == "clearnight" -%}clear night
+        {%- elif states("weather.forecast_home") == "fog" -%}fog
+        {%- elif states("weather.forecast_home") == "hail" -%}hail
+        {%- elif states("weather.forecast_home") == "lightning" -%}lightning/thunderstorms and rain
+        {%- elif states("weather.forecast_home") == "lightning-rainy" -%}lightning/thunderstorms and rain
+        {%- elif states("weather.forecast_home") == "partlycloudy" -%}a few clouds
+        {%- elif states("weather.forecast_home") == "pouring" -%}pouring rain
+        {%- elif states("weather.forecast_home") == "rainy" -%}rainy
+        {%- elif states("weather.forecast_home") == "snowy" -%}snowy
+        {%- elif states("weather.forecast_home") == "snowy-rainy" -%}a mixture of snow and rain
+        {%- elif states("weather.forecast_home") == "sunny" -%}sunny
+        {%- elif states("weather.forecast_home") == "windy" -%}windy
+        {%- elif states("weather.forecast_home") == "windy-variant" -%}wind and clouds
+        {%- elif states("weather.forecast_home") == "exceptional" -%}exceptional
+        {%- endif -%}
+
+- sensor:
     - name: "Current TV Source"
       unique_id: current-tv-source
       state: '{{ state_attr("media_player.lg_webos_smart_tv", "source") }}'
