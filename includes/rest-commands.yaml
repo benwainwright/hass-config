@@ -1,0 +1,3 @@
+shutdown_imac:
+  url: "http://bens-imac.local:8084/shutdown"
+  method: POST

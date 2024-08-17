@@ -1,3 +1,6 @@
+# Loads default set of integrations. Do not remove.
+default_config:
+
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include includes/scenes.yaml
@@ -9,27 +12,9 @@ intent_script: !include includes/intent-scripts.yaml
 ios: !include includes/ios-actions.yaml
 input_boolean: !include includes/booleans.yaml
 http: !include includes/http.yaml
-
-rest_command:
-  shutdown_imac:
-    url: "http://bens-imac.local:8084/shutdown"
-    method: POST
-
-lovelace:
-  resources:
-    - url: /local/lovelace-card-tools/card-tools.js
-      type: module
-    - url: /local/community/lovelace-mushroom/mushroom.js
-      type: module
-    - url: /local/js/bounce.js
-      type: module
-
-# Loads default set of integrations. Do not remove.
-default_config:
-
-shell_command:
-  imac_off: ssh bennonadmin@bens-imac.local shutdown -h now
-  update_config: cd /config && git pull origin main
+shell_command: !include includes/shell-commands.yaml
+rest_command: !include includes/rest-commands.yaml
+lovelace: !include includes/lovelace.yaml
 
 recorder:
   db_url: !secret mariadb_url
@@ -52,15 +37,6 @@ wake_on_lan:
 # Text to speech
 tts:
   - platform: google_translate
-
-# Dummy entity to enable logging that I can filter
-sensor:
-  - platform: template
-    sensors:
-      automation_log_entity:
-        unique_id: "node-red-logging-entity"
-        friendly_name: "Node Red Logging"
-        value_template: "on"
 
 homeassistant:
   auth_providers:
@@ -87,11 +63,6 @@ homeassistant:
   time_zone: "Europe/London"
   external_url: "https://home.bwainwright.com/"
   internal_url: "http://homeassistant.local"
-
-device_sun_light_trigger:
-  light_group: light.living_room_2
-  light_profile: relax
-  device_group: group.ben
 
 zone:
   - name: Home
