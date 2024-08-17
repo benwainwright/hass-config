@@ -5,7 +5,7 @@ template: !include includes/template.yaml
 climate: !include includes/climate.yaml
 frontend: !include frontend.yaml
 switch: !include switch.yaml
-intent_script: !include intent-scripts.yaml
+intent_script: !include includes/intent-scripts.yaml
 ios: !include ios.yaml
 input_boolean: !include includes/booleans.yaml
 
