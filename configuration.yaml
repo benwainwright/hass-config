@@ -1,7 +1,7 @@
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
-template: !include template.yaml
+template: !include includes/template.yaml
 climate: !include climate.yaml
 frontend: !include frontend.yaml
 switch: !include switch.yaml
