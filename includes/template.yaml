@@ -148,3 +148,15 @@
     - name: "Gym Heating Mode"
       unique_id: gym-heating-mode
       state: '{{ state_attr("climate.gym", "status").mode }}'
+
+- trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.living_room_sensor_sensor_state_motion
+      to:
+        - detected
+  sensor:
+    - name: "Last time living room motion sensor was triggered"
+      unique_id: last-living-room-motion-trigger
+      device_class: timestamp
+      state: "{{ now() }}"
