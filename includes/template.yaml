@@ -23,8 +23,9 @@
       
 
 - sensor:
-  name: "Good Morning Message"
-  state: |
+  - name: "Good Morning Message"
+    unique_id: good_morning_message
+    state: |
       {% set data = namespace(events=[]) %}
         {%- for n in range(10) -%}
           {%- set sensor = 'sensor.ical_ben_s_calendar_event_' + n | string -%}
