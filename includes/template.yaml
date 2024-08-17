@@ -51,7 +51,6 @@
 - sensor:
     - name: "Weather forecast"
       unique_id: weather_forecast
-      icon:
       state: |
         {%- if states("weather.forecast_home") == "clearnight" -%}clear night
         {%- elif states("weather.forecast_home") == "fog" -%}fog
