@@ -79,11 +79,6 @@ homeassistant:
   external_url: "https://home.bwainwright.com/"
   internal_url: "http://homeassistant.local"
 
-device_sun_light_trigger:
-  light_group: light.living_room_2
-  light_profile: relax
-  device_group: group.ben
-
 zone:
   - name: Home
     latitude: 53.4791973
