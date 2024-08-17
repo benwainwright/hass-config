@@ -1,10 +1,10 @@
 automation: !include automations.yaml
 script: !include scripts.yaml
-scene: !include scenes.yaml
+scene: !include includes/scenes.yaml
 template: !include includes/template.yaml
 climate: !include includes/climate.yaml
 frontend: !include includes/frontend.yaml
-switch: !include switch.yaml
+switch: !include includes/switch.yaml
 intent_script: !include includes/intent-scripts.yaml
 ios: !include includes/ios-actions.yaml
 input_boolean: !include includes/booleans.yaml
