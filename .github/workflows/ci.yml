@@ -27,8 +27,6 @@ jobs:
         run: |
           docker compose --project-directory ./check up --build --abort-on-container-exit
 
-          - name: Merge development -> staging
-
   merge:
     name: Merge to main
     needs: [check-config]
