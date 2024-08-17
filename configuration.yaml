@@ -8,10 +8,7 @@ switch: !include includes/switch.yaml
 intent_script: !include includes/intent-scripts.yaml
 ios: !include includes/ios-actions.yaml
 input_boolean: !include includes/booleans.yaml
-
-http:
-  server_port: 80
-  server_host: 0.0.0.0
+http: !include includes/http.yaml
 
 rest_command:
   shutdown_imac:
