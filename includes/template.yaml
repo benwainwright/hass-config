@@ -154,7 +154,7 @@
       entity_id:
         - binary_sensor.living_room_sensor_sensor_state_motion
       to:
-        - detected
+        - on
   sensor:
     - name: "Last time living room motion sensor was triggered"
       unique_id: last-living-room-motion-trigger
