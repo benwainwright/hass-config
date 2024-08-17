@@ -18,13 +18,6 @@ rest_command:
     url: "http://bens-imac.local:8084/shutdown"
     method: POST
 
-proximity:
-  home:
-    tolerance: 50
-    unit_of_measurement: m
-    devices:
-      - person.ben_wainwright
-
 lovelace:
   resources:
     - url: /local/lovelace-card-tools/card-tools.js
