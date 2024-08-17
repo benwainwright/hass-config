@@ -53,15 +53,6 @@ wake_on_lan:
 tts:
   - platform: google_translate
 
-# Dummy entity to enable logging that I can filter
-sensor:
-  - platform: template
-    sensors:
-      automation_log_entity:
-        unique_id: "node-red-logging-entity"
-        friendly_name: "Node Red Logging"
-        value_template: "on"
-
 homeassistant:
   auth_providers:
     - type: homeassistant
