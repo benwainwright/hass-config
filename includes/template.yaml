@@ -157,6 +157,6 @@
         - on
   sensor:
     - name: "Last time living room motion sensor was triggered"
-      unique_id: last-living-room-motion-trigger
+      unique_id: last-living-room-motion-triggered
       device_class: timestamp
       state: "{{ now() }}"
