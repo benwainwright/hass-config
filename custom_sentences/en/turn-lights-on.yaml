@@ -1,0 +1,10 @@
+language: "en"
+intents:
+  TurnLightsOn:
+    data:
+      - sentences:
+          - "(turn | switch) on [the ]lights"
+          - "(turn | switch) the [lights ]on"
+          - "(turn | switch) on [the ]light"
+          - "(turn | switch) the [light ]on"
+          - "light[s] on"
