@@ -6,10 +6,6 @@ done_good_morning:
   name: Have I had my good morning message
   initial: false
 
-phone_charging_in_bedroom:
-  name: Phone charging in bedroom
-  initial: false
-
-phone_charging_in_living_room:
-  name: Phone charging in living room
+sleep_mode:
+  name: Sleep mode
   initial: false
