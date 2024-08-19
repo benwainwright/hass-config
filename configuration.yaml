@@ -68,7 +68,7 @@ zone:
   - name: Home
     latitude: 53.4791973
     longitude: -2.2213431
-    radius: 35
+    radius: 15
     icon: mdi:account-multiple
 
 group:
