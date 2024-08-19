@@ -15,6 +15,13 @@
       unique_id: imac-screen-on
       state: '{{ state_attr("binary_sensor.bens_imac_pro_active", "Screen Off") }}'
 
+- binary_sensor:
+    - name: "Ben is home"
+      unique_id: "ben-is-home"
+      device_class: "presence"
+      delay_off: "0:00:30"
+      state: "{{ is_state('person.ben_wainwright', 'home') }}"
+
 - sensor:
     - name: "Todays events"
       unique_id: todays-events
