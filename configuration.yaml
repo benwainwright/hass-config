@@ -34,9 +34,6 @@ notify:
 
 wake_on_lan:
 
-device_tracker:
-  - platform: bluetooth_tracker
-
 # Text to speech
 tts:
   - platform: google_translate
