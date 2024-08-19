@@ -1,5 +1,10 @@
 ######### Living Room ###########
 
+- sensor:
+    - name: "Available updates"
+      unique_id: "available-updates"
+      state: "{{ state_attr('sensor.supervisor_updates', 'addons') | selectattr('update_available', 'true') | list | count }}"
+
 - binary_sensor:
     - name: "Living room occupancy"
       unique_id: living_room_occupancy
