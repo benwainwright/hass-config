@@ -13,20 +13,22 @@
         {{ count.value -}}
 
 - sensor:
-  - name: "Low battery count"
-    unique_id: "low-battery-count"
-    state: |
-      {% set count = namespace(value=0) %}
-      {% for id in label_entities("Battery") %}
-        {% if states(id) | int(-1) == -1 %}
-        {% if states(id) == "on" %}
-          {% set count.value = count.value + 1 %}
-        {% endif %}
-        {% elif states(id) | int < 25 %}
-          {% set count.value = count.value + 1 %}
-        {% endif %}
-      {% endfor %}
-      {{ count.value }}
+    - name: "Low battery count"
+      unique_id: "low-battery-count"
+      state: |
+        {% set count = namespace(value=0) %}
+        {% for id in label_entities("Battery") %}
+          {% if states(id) | int(-1) == -1 %}
+          {% if states(id) == "on" %}
+            {% set count.value = count.value + 1 %}
+          {% endif %}
+          {% elif states(id) | int < 25 %}
+            {% set count.value = count.value + 1 %}
+          {% endif %}
+        {% endfor %}
+        {{ count.value }}
+
+
 
 - sensor:
     - name: "Available updates"
@@ -155,6 +157,13 @@
       unique_id: gym-target-temperature
       unit_of_measurement: "°C"
       state: '{{ state_attr("climate.gym", "temperature") }}'
+
+
+- trigger:
+    - platform: state
+      entity_id: todo.inbox
+
+
 
 - sensor:
     - name: "Gym Heating Mode"
