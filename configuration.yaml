@@ -15,6 +15,7 @@ http: !include includes/http.yaml
 shell_command: !include includes/shell-commands.yaml
 rest_command: !include includes/rest-commands.yaml
 lovelace: !include includes/lovelace.yaml
+input_select: !include includes/selects.yaml
 
 recorder:
   db_url: !secret mariadb_url
