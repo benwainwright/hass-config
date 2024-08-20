@@ -1,8 +1,8 @@
 ######### Living Room ###########
 
 - sensor:
-    - name: "Available updates"
-      unique_id: "available-updates"
+    - name: "Available updates count"
+      unique_id: "available-updates-count"
       state: |
         {%- set count = namespace(value=0) -%}
         {%- for st in states.update  -%}
@@ -12,6 +12,19 @@
         {%- endfor -%}
         {{ count.value -}}
 
+- sensor:
+    - name: "Available updates"
+      unique_id: "available-updates"
+      state: |
+        {%- set count = namespace(value=0) -%}
+        [
+        {%- for st in states.update  -%}
+          {%- if st.attributes['installed_version'] == st.attributes['latest_version'] -%}
+          {% if count.value != 0 %},{% endif %}{{ st.state }}
+          {%- endif -%}
+          {%- set count.value = count.value + 1 -%}
+        {%- endfor -%}
+        ]
 
 - binary_sensor:
     - name: "Living room occupancy"
