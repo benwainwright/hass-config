@@ -5,6 +5,6 @@ actions:
       text: Door lock
       color: "#ff0000"
 
-      icon:
-        icon: lock
-        color: "#ffffff"
+    icon:
+      icon: lock
+      color: "#ffffff"
