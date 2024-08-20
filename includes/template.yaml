@@ -3,7 +3,15 @@
 - sensor:
     - name: "Available updates"
       unique_id: "available-updates"
-      state: "{{ state_attr('sensor.supervisor_updates', 'addons') | selectattr('update_available', 'true') | list | count }}"
+      state: |
+        {%- set count = namespace(value=0) -%}
+        {%- for st in states.update  -%}
+          {%- if st.attributes['installed_version'] != st.attributes['latest_version'] -%}
+            {%- set count.value = count.value + 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {{ count.value -}}
+
 
 - binary_sensor:
     - name: "Living room occupancy"
