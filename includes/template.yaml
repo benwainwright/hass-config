@@ -15,7 +15,7 @@
         (states("binary_sensor.bens_imac_pro_active") == "on") or
         (states("media_player.apple_tv") == "playing") or
         (states("sensor.wearing_clapper2_status") == "Playing") }}
-        
+
 - sensor:
     - name: "iMac Screen Off"
       unique_id: imac-screen-on

@@ -2,5 +2,9 @@ actions:
   - name: Lock
     background_color: "#000000"
     label:
-      text: '{{ states("lock.front_door") }}'
+      text: Door lock
       color: "#ff0000"
+
+      icon:
+        icon: lock
+        color: "#ffffff"
