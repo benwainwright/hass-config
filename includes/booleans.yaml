@@ -9,3 +9,7 @@ done_good_morning:
 sleep_mode:
   name: Sleep mode
   initial: false
+
+blinds_open:
+  name: Blinds open
+  initial: false
