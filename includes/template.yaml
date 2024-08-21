@@ -28,8 +28,6 @@
         {% endfor %}
         {{ count.value }}
 
-
-
 - sensor:
     - name: "Available updates"
       unique_id: "available-updates"
@@ -64,7 +62,7 @@
     - name: "Ben is home"
       unique_id: "ben-is-home"
       device_class: "presence"
-      delay_off: "0:00:30"
+      delay_off: "0:01:00"
       state: "{{ is_state('person.ben_wainwright', 'home') }}"
 
 - sensor:
@@ -158,12 +156,9 @@
       unit_of_measurement: "°C"
       state: '{{ state_attr("climate.gym", "temperature") }}'
 
-
 - trigger:
     - platform: state
       entity_id: todo.inbox
-
-
 
 - sensor:
     - name: "Gym Heating Mode"
