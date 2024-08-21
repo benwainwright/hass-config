@@ -10,6 +10,6 @@ sleep_mode:
   name: Sleep mode
   initial: false
 
-blinds_open:
-  name: Blinds open
+blinds_normally_open:
+  name: Blinds normally open
   initial: false
