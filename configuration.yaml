@@ -1,6 +1,5 @@
 # Loads default set of integrations. Do not remove.
 default_config:
-
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include includes/scenes.yaml
