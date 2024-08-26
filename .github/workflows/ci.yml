@@ -12,27 +12,27 @@ on:
     branches: ["dev"]
 
 jobs:
-  # check-config:
-  #   name: Home Assistant Core Configuration Check
-  #   runs-on: ubuntu-latest
-  #   continue-on-error: false
-  #   steps:
-  #     - name: ⤵️ Check out configuration from GitHub
-  #       uses: actions/checkout@v3
+  check-config:
+    name: Home Assistant Core Configuration Check
+    runs-on: ubuntu-latest
+    continue-on-error: false
+    steps:
+      - name: ⤵️ Check out configuration from GitHub
+        uses: actions/checkout@v3
 
-  #     - name: Move config
-  #       run: mv ./* check || true
+      - name: Move config
+        run: mv ./* check || true
 
-  #     - name: Copy fake secrets
-  #       run: mv check/fakesecrets.yaml check/secrets.yaml
+      - name: Copy fake secrets
+        run: mv check/fakesecrets.yaml check/secrets.yaml
 
-  #     - name: Home assistant configuration check
-  #       run: |
-  #         docker compose --project-directory ./check up --build --abort-on-container-exit
+      - name: Home assistant configuration check
+        run: |
+          docker compose --project-directory ./check up --build --abort-on-container-exit
 
   merge:
     name: Merge to main
-    # needs: [check-config]
+    needs: [check-config]
     runs-on: ubuntu-latest
     continue-on-error: false
     steps:
