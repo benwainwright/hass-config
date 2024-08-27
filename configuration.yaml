@@ -9,7 +9,6 @@ frontend: !include includes/frontend.yaml
 switch: !include includes/switch.yaml
 intent_script: !include includes/intent-scripts.yaml
 ios: !include includes/ios-actions.yaml
-input_boolean: !include includes/booleans.yaml
 http: !include includes/http.yaml
 shell_command: !include includes/shell-commands.yaml
 rest_command: !include includes/rest-commands.yaml
