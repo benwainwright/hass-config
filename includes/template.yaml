@@ -112,6 +112,12 @@
       unit_of_measurement: "°C"
       unique_id: living-room-target-temperature
       state: '{{ state_attr("climate.living_room", "temperature") }}'
+      
+- sensor:
+    - name: "Boiler Target Temperature"
+      unit_of_measurement: "°C"
+      unique_id: living-room-target-temperature
+      state: '{{ state_attr("climate.boiler", "temperature") }}'
 
 - sensor:
     - name: "Living Room Heating Mode"
